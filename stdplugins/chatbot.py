@@ -12,7 +12,7 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 import os
 
 
-bot= ChatBot('Bot')     #Prepare Bot
+bot= ChatBot('Bot')   #Prepare Bot
 trainer = ChatterBotCorpusTrainer(bot)
 bot_trained = False
 corpus_path = '/app/english/'
