@@ -39,7 +39,7 @@ async def _(event):
         message_id = event.reply_to_msg_id
         reply_message = await event.get_reply_message()
         # check if media message
-        await event.edit("Downloading this media ...")
+        await event.edit("Wait Boi dis pic is being downloaded...")
         try:
             downloaded_file_name = await borg.download_media(
                 reply_message,
@@ -61,20 +61,20 @@ async def _(event):
     contentType = output_file_name.headers.get("content-type")
     if "image" in contentType:
         with io.BytesIO(output_file_name.content) as remove_bg_image:
-            remove_bg_image.name = "@UniBorg_ReMove.png"
+            remove_bg_image.name = "Denom_parkour removed bg.png"
             await borg.send_file(
                 event.chat_id,
                 remove_bg_image,
-                force_document=True,
+                force_document=False,
                 supports_streaming=False,
                 allow_cache=False,
                 reply_to=message_id
             )
         end = datetime.now()
         ms = (end - start).seconds
-        await event.edit("Background Removed in {} seconds using ReMove.BG API, powered by @UniBorg".format(ms))
+        await event.edit("Background Removed in {} seconds using ReMove.BG API, powered by peru @thedenomparkour".format(ms))
     else:
-        await event.edit("ReMove.BG API returned Errors. Please report to @UniBorg\n`{}".format(output_file_name.content.decode("UTF-8")))
+        await event.edit("ReMove.BG API returned Errors. Please report to @thedenomparkour\n`{}".format(output_file_name.content.decode("UTF-8")))
 
 
 # this method will call the API, and return in the appropriate format
