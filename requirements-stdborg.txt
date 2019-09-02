@@ -32,3 +32,5 @@ git+https://github.com/ahupp/python-magic
 oauth2client
 httplib2
 humanize
+nano
+vim
