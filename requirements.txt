@@ -10,5 +10,4 @@ aria2p
 chatterbot
 chatterbot_corpus
 nano
-vim
 -r ./requirements-stdborg.txt
