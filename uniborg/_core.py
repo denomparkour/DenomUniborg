@@ -12,7 +12,7 @@ from uniborg import util
 DELETE_TIMEOUT = 5
 
 
-@borg.on(util.admin_cmd(pattern="loda (?P<shortname>\w+)$"))  # pylint:disable=E0602
+@borg.on(util.admin_cmd(pattern="init (?P<shortname>\w+)$"))  # pylint:disable=E0602
 async def load_reload(event):
     await event.delete()
     shortname = event.pattern_match["shortname"]
@@ -30,7 +30,7 @@ async def load_reload(event):
         await event.respond(f"Failed to (re)load plugin {shortname}: {e}")
 
 
-@borg.on(util.admin_cmd(pattern="(?:unloada|remove) (?P<shortname>\w+)$"))  # pylint:disable=E0602
+@borg.on(util.admin_cmd(pattern="(?:fek|remove) (?P<shortname>\w+)$"))  # pylint:disable=E0602
 async def remove(event):
     await event.delete()
     shortname = event.pattern_match["shortname"]
@@ -45,7 +45,7 @@ async def remove(event):
     await msg.delete()
 
 
-@borg.on(util.admin_cmd(pattern="sund pligon (?P<shortname>\w+)$"))  # pylint:disable=E0602
+@borg.on(util.admin_cmd(pattern="transfer plugin (?P<shortname>\w+)$"))  # pylint:disable=E0602
 async def send_plug_in(event):
     if event.fwd_from:
         return
@@ -67,7 +67,7 @@ async def send_plug_in(event):
     await event.delete()
 
 
-@borg.on(util.admin_cmd(pattern="instull pligon"))  # pylint:disable=E0602
+@borg.on(util.admin_cmd(pattern="build plugin"))  # pylint:disable=E0602
 async def install_plug_in(event):
     if event.fwd_from:
         return
@@ -79,10 +79,10 @@ async def install_plug_in(event):
             )
             if "(" not in downloaded_file_name:
                 borg.load_plugin_from_file(downloaded_file_name)  # pylint:disable=E0602
-                await event.edit("Gandu, Installed Plugin `{}`".format(os.path.basename(downloaded_file_name)))
+                await event.edit("Plugin installed af😜😜 `{}`".format(os.path.basename(downloaded_file_name)))
             else:
                 os.remove(downloaded_file_name)
-                await event.edit("oh! Mkc, pligon install na hove.")
+                await event.edit("oh! aBC plugin is ded 😖😖.")
         except Exception as e:  # pylint:disable=C0103,W0703
             await event.edit(str(e))
             os.remove(downloaded_file_name)
