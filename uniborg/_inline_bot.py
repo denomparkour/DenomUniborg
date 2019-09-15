@@ -200,17 +200,20 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
 **[GCC 7.3.0]**
 **Telethon 1.9.0**
 
-**Custom Built Fork:** https://github.com/denomparkour/DenomUniborg""",
+**Custom Built:** https://github.com/denomparkour/DenomUniborg""",
                 buttons=[
-                    [custom.Button.url("👤Contact Modder👤", "https://telegram.dog/r4v4n4"),   ],
+                    [custom.Button.url("👤Contact Creator👤", "https://telegram.dog/denomparkour")
+                             ],
+                link_preview=False
             )
+            
         await event.answer([result] if result else None)
 
 
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"helpme_next\((.+?)\)")
     ))
-    async def on_plug_in_callback_query_handler(event):
+    async def on_plug_in_callback_query_handler(event):Na 
         if event.query.user_id == borg.uid:  # pylint:disable=E0602
             current_page_number = int(
                 event.data_match.group(1).decode("UTF-8"))
