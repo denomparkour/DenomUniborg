@@ -203,7 +203,6 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
 **Custom Built Fork:** https://github.com/denomparkour/DenomUniborg""",
                 buttons=[
                     [custom.Button.url("👤Contact Modder👤", "https://telegram.dog/r4v4n4"),   ],
-                link_preview=False
             )
         await event.answer([result] if result else None)
 
