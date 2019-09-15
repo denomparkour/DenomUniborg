@@ -76,133 +76,25 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 buttons=buttons,
                 link_preview=False
             )
-        elif query.startswith("ytdl"):
-            # input format should be ytdl URL
-            p = re.compile("ytdl (.*)")
-            r = p.search(query)
-            ytdl_url = r.group(1).strip()
-            if ytdl_url.startswith("http"):
-                command_to_exec = [
-                    "youtube-dl",
-                    "--no-warnings",
-                    "--youtube-skip-dash-manifest",
-                    "-j",
-                    ytdl_url
-                ]
-                logger.info(command_to_exec)
-                process = await asyncio.create_subprocess_exec(
-                    *command_to_exec,
-                    # stdout must a pipe to be accessible as process.stdout
-                    stdout=asyncio.subprocess.PIPE,
-                    stderr=asyncio.subprocess.PIPE,
-                )
-                # Wait for the subprocess to finish
-                stdout, stderr = await process.communicate()
-                e_response = stderr.decode().strip()
-                # logger.info(e_response)
-                t_response = stdout.decode().strip()
-                logger.info(command_to_exec)
-                if e_response:
-                    error_message = e_response.replace("please report this issue on https://yt-dl.org/bug . Make sure you are using the latest version; see  https://yt-dl.org/update  on how to update. Be sure to call youtube-dl with the --verbose flag and include its complete output.", "")
-                    # throw error
-                    result = builder.article(
-                        "YTDL Errors © @UniBorg",
-                        text=f"{error_message} Powered by @UniBorg",
-                        link_preview=False
-                    )
-                elif t_response:
-                    x_reponse = t_response
-                    if "\n" in x_reponse:
-                        x_reponse, _ = x_reponse.split("\n")
-                    response_json = json.loads(x_reponse)
-                    save_ytdl_json_path = Config.TMP_DOWNLOAD_DIRECTORY + \
-                        "/" + "YouTubeDL" + ".json"
-                    with open(save_ytdl_json_path, "w", encoding="utf8") as outfile:
-                        json.dump(response_json, outfile, ensure_ascii=False)
-                    # logger.info(response_json)
-                    inline_keyboard = []
-                    duration = None
-                    if "duration" in response_json:
-                        duration = response_json["duration"]
-                    if "formats" in response_json:
-                        for formats in response_json["formats"]:
-                            format_id = formats.get("format_id")
-                            format_string = formats.get("format_note")
-                            if format_string is None:
-                                format_string = formats.get("format")
-                            format_ext = formats.get("ext")
-                            approx_file_size = ""
-                            if "filesize" in formats:
-                                approx_file_size = humanbytes(formats["filesize"])
-                            cb_string_video = "ytdl|{}|{}|{}".format(
-                                "video", format_id, format_ext)
-                            if format_string is not None:
-                                ikeyboard = [
-                                    custom.Button.inline(
-                                        " " + format_ext  + " video [" + format_string +
-                                        "] ( " +
-                                        approx_file_size + " )",
-                                        data=(cb_string_video)
-                                    )
-                                ]
-                            else:
-                                # special weird case :\
-                                ikeyboard = [
-                                    custom.Button.inline(
-                                        " " + approx_file_size + " ",
-                                        data=cb_string_video
-                                    )
-                                ]
-                            inline_keyboard.append(ikeyboard)
-                        if duration is not None:
-                            cb_string_64 = "ytdl|{}|{}|{}".format("audio", "64k", "mp3")
-                            cb_string_128 = "ytdl|{}|{}|{}".format("audio", "128k", "mp3")
-                            cb_string = "ytdl|{}|{}|{}".format("audio", "320k", "mp3")
-                            inline_keyboard.append([
-                                custom.Button.inline(
-                                    "MP3 " + "(" + "64 kbps" + ")", data=cb_string_64
-                                ),
-                                custom.Button.inline(
-                                    "MP3 " + "(" + "128 kbps" + ")", data=cb_string_128
-                                )
-                            ])
-                            inline_keyboard.append([
-                                custom.Button.inline(
-                                    "MP3 " + "(" + "320 kbps" + ")", data=cb_string
-                                )
-                            ])
-                    else:
-                        format_id = response_json["format_id"]
-                        format_ext = response_json["ext"]
-                        cb_string_video = "ytdl|{}|{}|{}".format(
-                            "video", format_id, format_ext)
-                        inline_keyboard.append([
-                            custom.Button.inline(
-                                "video",
-                                data=cb_string_video
-                            )
-                        ])
-                    result = builder.article(
-                        "YouTube © @UniBorg",
-                        text=f"{ytdl_url} powered by @UniBorg",
-                        buttons=inline_keyboard,
-                        link_preview=True
-                    )
+        elif query.startswith("tb_btn"):
+            result = builder.article(
+                "Button Parser © @UniBorg",
+                text=f"powered by @UniBorg",
+                buttons=[],
+                link_preview=True
+            )
         else:
             result = builder.article(
                 "© @UniBorg",
-                text="""@UniBorg **( Custom Built for** @thedenomparkour **)** 
+                text="""@denomparkour **( Custom Built By** @denomparkour xD**)** 
 **Verified Account:** ✅
+**Pithun 3.7.4 (default, Sep 12 2019, 01:19:52)** 
+**[GCC 7.4.0]**
+**Talethrun 1.10.3**
 
-
-
-**Python ver 3.7.3 (default, Apr  3 2019, 21:35:17)** 
-**[GCC 7.3.0]**
-**Telethon 1.9.0**
-
-**Custom Built:** https://github.com/denomparkour/DenomUniborg""",
+**Custom Built Fork:** https://github.com/denomparkour/DenomUniborg""",
                 buttons=[
-                    [custom.Button.url("👤Contact Creator👤", "https://telegram.dog/r4v4n4"), custom.Button.url(
+                    [custom.Button.url("👤Contact Modder👤", "https://telegram.dog/denomparkour"), custom.Button.url(
                         "📼Ravana Audio Memes📼", "https://t.me/tgaudiomemes")],
                     [custom.Button.url("👨‍💻Source Code👨‍💻", "https://github.com/ravana69/Pornhub"), custom.Button.url(
                         "❕❗Deploy Me❗❕", "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fravana69%2FPornHub%2F&template=https%3A%2F%2Fgithub.com%2Fravana69%2FPornHub%2F")],
@@ -218,7 +110,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
         data=re.compile(b"helpme_next\((.+?)\)")
     ))
-    async def on_plug_in_callback_query_handler(event):Na 
+    async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == borg.uid:  # pylint:disable=E0602
             current_page_number = int(
                 event.data_match.group(1).decode("UTF-8"))
@@ -227,7 +119,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Ayy! Bc Bhago...Mera wala mat touch karna😒😒\n\nCustom Fork: https://github.com/denomparkour/DenomUniborg\n\n\nNote: Bas kar BetiChod, Maa Ke Laude, Madarchod"
+            reply_pop_up_alert = "⚠️ Touch mat karna bisi ⚠️\n\nCustom Fork: https://www.github.com/denomparkour/DenomUniborg\n\n\nNote: Bas kar BetiChod, Maa Ke Laude, Madarchod"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
@@ -245,7 +137,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Mera message edit mat karo bisi....tera wala @Uniborg se lelo😤"
+            reply_pop_up_alert = "Ayu lodu....Mera wala touch mat karna.Chahiye tho @Uniborg se lelo"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
@@ -259,7 +151,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         reply_pop_up_alert = help_string if help_string is not None else \
             "No DOCSTRING has been setup for {} plugin".format(plugin_name)
         reply_pop_up_alert += "\n\n Use .unload {} to remove this plugin\n\
-            © @UniBorg".format(plugin_name)
+            © @r4v4n4".format(plugin_name)
         await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
