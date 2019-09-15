@@ -191,24 +191,18 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         else:
             result = builder.article(
                 "© @UniBorg",
-                text="""@UniBorg **( Custom Built By** @r4v4n4 **)** 
+                text="""@UniBorg **( Custom Built for** @thedenomparkour **)** 
 **Verified Account:** ✅
-**Official Website:** https://ravanaisdrunk.site.live
 
-**Pithun 3.7.3 (default, Apr  3 2019, 21:35:17)** 
+
+
+**Python ver 3.7.3 (default, Apr  3 2019, 21:35:17)** 
 **[GCC 7.3.0]**
-**Talethrun 1.9.0**
+**Telethon 1.9.0**
 
-**Custom Built Fork:** https://github.com/ravana69/Pornhub""",
+**Custom Built Fork:** https://github.com/denomparkour/DenomUniborg""",
                 buttons=[
-                    [custom.Button.url("👤Contact Creator👤", "https://telegram.dog/r4v4n4"), custom.Button.url(
-                        "📼Ravana Audio Memes📼", "https://t.me/tgaudiomemes")],
-                    [custom.Button.url("👨‍💻Source Code👨‍💻", "https://github.com/ravana69/Pornhub"), custom.Button.url(
-                        "❕❗Deploy Me❗❕", "https://da.gd/Emcf")],
-                    [custom.Button.url("🔰Update Fork🔰", "tg://need_update_for_some_feature"), custom.Button.url(
-                        "✳️Fork Boost✳️", "tg://some_unsupported_feature"), custom.Button.url(
-                        "♻️Refresh Heroku♻️", "tg://chutiya")]
-                ],
+                    [custom.Button.url("👤Contact Modder👤", "https://telegram.dog/r4v4n4"),   ],
                 link_preview=False
             )
         await event.answer([result] if result else None)
@@ -226,7 +220,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "⚠️ Warning: Don't Press Any Buttons ⚠️\n\nCustom Fork: https://github.com/ravana69/Pornhub\n\n\nNote: Bas kar BetiChod, Maa Ke Laude, Madarchod"
+            reply_pop_up_alert = "Ayy! Bc Bhago...Mera wala mat touch karna😒😒\n\nCustom Fork: https://github.com/denomparkour/DenomUniborg\n\n\nNote: Bas kar BetiChod, Maa Ke Laude, Madarchod"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
@@ -244,7 +238,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Please get your own @UniBorg, and don't edit my messages!"
+            reply_pop_up_alert = "Mera message edit mat karo bisi....tera wala @Uniborg se lelo😤"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
