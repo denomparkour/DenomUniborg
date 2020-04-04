@@ -1,9 +1,6 @@
-"""DA.GD helpers in @UniBorg
-Available Commands:
-.isup URL
-.dns google.com
-.short <long url>
-.unshort <short url>"""
+"""COMMAND : .dns , .link, .unshort , .myip , .myisp , .myhead , .mywho , .myup"""
+
+
 from telethon import events
 import os
 import requests
@@ -24,7 +21,7 @@ async def _(event):
         await event.edit("i can't seem to find {} on the internet".format(input_str))
 
 
-@borg.on(admin_cmd("short (.*)"))
+@borg.on(admin_cmd("link (.*)"))
 async def _(event):
     if event.fwd_from:
         return
