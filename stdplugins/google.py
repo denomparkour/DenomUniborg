@@ -1,8 +1,8 @@
 """ Powered by @Google
 Available Commands:
-.google search <query>
-.google image <query>
-.google reverse search"""
+.gs <query>
+.gi <query>
+.grs"""
 
 import asyncio
 import os
@@ -10,7 +10,6 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 from google_images_download import google_images_download
-from gsearch.googlesearch import search
 from uniborg.util import admin_cmd
 
 
@@ -18,16 +17,23 @@ def progress(current, total):
     logger.info("Downloaded {} of {}\nCompleted {}".format(current, total, (current / total) * 100))
 
 
-@borg.on(admin_cmd("google search (.*)"))
+@borg.on(admin_cmd(pattern="gs (.*)"))
 async def _(event):
     if event.fwd_from:
         return
     start = datetime.now()
-    await event.edit("Processing ...")
+    await event.edit("Ruk Ja Betichod, Google Se Bolta Hoon Tera IP Ban Kare ...")
+    # SHOW_DESCRIPTION = False
     input_str = event.pattern_match.group(1) # + " -inurl:(htm|html|php|pls|txt) intitle:index.of \"last modified\" (mkv|mp4|avi|epub|pdf|mp3)"
-    search_results = search(input_str, num_results=Config.GOOGLE_SEARCH_COUNT_LIMIT)
+    input_url = "https://bots.shrimadhavuk.me/search/?q={}".format(input_str)
+    headers = {"USER-AGENT": "UniBorg"}
+    response = requests.get(input_url, headers=headers).json()
     output_str = " "
-    for text, url in search_results:
+    for result in response["results"]:
+        text = result.get("title")
+        url = result.get("url")
+        description = result.get("description")
+        image = result.get("image")
         output_str += " 👉🏻  [{}]({}) \n\n".format(text, url)
     end = datetime.now()
     ms = (end - start).seconds
@@ -36,7 +42,7 @@ async def _(event):
     await event.edit("Google: {}\n{}".format(input_str, output_str), link_preview=False)
 
 
-@borg.on(admin_cmd("google image (.*)"))
+@borg.on(admin_cmd(pattern="gi (.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -55,7 +61,8 @@ async def _(event):
         "output_directory": Config.TMP_DOWNLOAD_DIRECTORY
     }
     paths = response.download(arguments)
-    lst = paths[input_str]
+    logger.info(paths)
+    lst = paths[0].get(input_str)
     await borg.send_file(
         event.chat_id,
         lst,
@@ -63,6 +70,7 @@ async def _(event):
         reply_to=event.message.id,
         progress_callback=progress
     )
+    logger.info(lst)
     for each_file in lst:
         os.remove(each_file)
     end = datetime.now()
@@ -72,7 +80,7 @@ async def _(event):
     await event.delete()
 
 
-@borg.on(admin_cmd("google reverse search"))
+@borg.on(admin_cmd(pattern="grs"))
 async def _(event):
     if event.fwd_from:
         return
@@ -123,4 +131,58 @@ async def _(event):
 **Possible Related Search**: <a href="{prs_url}">{prs_text}</a>
 
 More Info: Open this <a href="{the_location}">Link</a> in {ms} seconds""".format(**locals())
+    await event.edit(OUTPUT_STR, parse_mode="HTML", link_preview=False)
+
+
+@borg.on(admin_cmd(pattern="grd"))
+async def _(event):
+    if event.fwd_from:
+        return
+    start = datetime.now()
+    BASE_URL = "http://www.google.com"
+    OUTPUT_STR = "Reply to an image to do Google Reverse Search"
+    if event.reply_to_msg_id:
+        await event.edit("Pre Processing Media")
+        previous_message = await event.get_reply_message()
+        previous_message_text = previous_message.message
+        if previous_message.media:
+            downloaded_file_name = await borg.download_media(
+                previous_message,
+                Config.TMP_DOWNLOAD_DIRECTORY
+            )
+            SEARCH_URL = "{}/searchbyimage/upload".format(BASE_URL)
+            multipart = {
+                "encoded_image": (downloaded_file_name, open(downloaded_file_name, "rb")),
+                "image_content": ""
+            }
+            # https://stackoverflow.com/a/28792943/4723940
+            google_rs_response = requests.post(SEARCH_URL, files=multipart, allow_redirects=False)
+            the_location = google_rs_response.headers.get("Location")
+            os.remove(downloaded_file_name)
+        else:
+            previous_message_text = previous_message.message
+            SEARCH_URL = "{}/searchbyimage?image_url={}"
+            request_url = SEARCH_URL.format(BASE_URL, previous_message_text)
+            google_rs_response = requests.get(request_url, allow_redirects=False)
+            the_location = google_rs_response.headers.get("Location")
+        await event.edit("Found Google Result. Pouring some soup on it!")
+        headers = {
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:58.0) Gecko/20100101 Firefox/58.0"
+        }
+        response = requests.get(the_location, headers=headers)
+        soup = BeautifulSoup(response.text, "html.parser")
+        # document.getElementsByClassName("r5a77d"): PRS
+        prs_div = soup.find_all("div", {"class": "r5a77d"})[0]
+        prs_anchor_element = prs_div.find("a")
+        prs_url = BASE_URL + prs_anchor_element.get("href")
+        prs_text = prs_anchor_element.text
+        # document.getElementById("jHnbRc")
+        img_size_div = soup.find(id="jHnbRc")
+        img_size = img_size_div.find_all("div")
+        end = datetime.now()
+        ms = (end - start).seconds
+        OUTPUT_STR = """{img_size}
+**Possible Related Search**: [Dick](http://www.google.com/search?q=Dick&sa=X&ved=2ahUKEwiLyfLkppLnAhVRAp0JHalFBVQQvQ4oBHoECAcQKw)
+
+More Info: Open this [link](https://www.github.com/pornhub) in {ms} seconds""".format(**locals())
     await event.edit(OUTPUT_STR, parse_mode="HTML", link_preview=False)

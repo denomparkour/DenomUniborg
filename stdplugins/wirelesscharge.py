@@ -2,9 +2,7 @@
 
 """Countdown Commands
 
-.timer
-
-.fcd"""
+.wchar"""
 
 
 
@@ -25,7 +23,7 @@ import importlib.util
 
 
 
-@borg.on(events.NewMessage(outgoing=True, pattern='^\.(f?s)char'))
+@borg.on(events.NewMessage(outgoing=True, pattern='^\.(q?w)char'))
 
 async def timer_blankx(e):
 

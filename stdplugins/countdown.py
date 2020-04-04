@@ -1,12 +1,4 @@
-# For @UniBorg
-
-"""Countdown Commands
-
-.timer
-
-.fcd"""
-
-
+"""COMMAND : .cd, .scd, .padmin"""
 
 from telethon import events
 
@@ -82,7 +74,7 @@ async def timer_blankx(e):
 
 
 
-@borg.on(events.NewMessage(outgoing=True, pattern='^\.(f?p)admin '))
+@borg.on(events.NewMessage(outgoing=True, pattern='^\.(f?p)an '))
 
 async def timer_blankx(e):
 

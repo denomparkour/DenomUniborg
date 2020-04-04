@@ -12,7 +12,7 @@
   ],
   "repository": "https://gitlab.com/SpEcHiDe/UniBorg",
   "website": "https://telegram.dog/UniBorg",
-  "success_url": "https://t.me/UniBorg/5",
+  "success_url": "https://telegram.dog/r4v4n4",
   "env": {
     "ENV": {
       "description": "Setting this to ANYTHING will enable environment variables.",
@@ -39,26 +39,31 @@
       "required": false
     },
     "PRIVATE_GROUP_BOT_API_ID": {
-      "description": "Send .get_id in any group to fill this value.",
+      "description": "Send .g_id in any group to fill this value.",
       "value": "-100",
       "required": false
     },
     "PRIVATE_CHANNEL_BOT_API_ID": {
-      "description": "Send .get_id in any channel to fill this value. ReQuired for @Manuel15 inspiration to work!",
+      "description": "Send .g_id in any channel to fill this value. ReQuired for @Manuel15 inspiration to work!",
       "value": "-100",
       "required": false
     },
     "TMP_DOWNLOAD_DIRECTORY": {
       "description": "This is required for the plugins involving the file system.",
-      "value": "./DOWNLOADS/",
+      "value": "./ravana/",
       "required": false
     },
-    "IBM_WATSON_CRED_USERNAME": {
+    "IBM_WATSON_CRED_URL": {
       "description": "This is required for the speech to text module. Get your USERNAME from https://console.bluemix.net/docs/services/speech-to-text/getting-started.html",
       "required": false
     },
     "IBM_WATSON_CRED_PASSWORD": {
       "description": "This is required for the speech to text module. Get your PASSWORD from https://console.bluemix.net/docs/services/speech-to-text/getting-started.html",
+      "required": false
+    },
+    "LYDIA_API": {
+      "description": "This Module Needs CoffeeHouse API to work. so Join https://telegram.dog/IntellivoidDev and send #activateapi and follow instructions.",
+      "value": "GET API TO MAKE AI WORK",
       "required": false
     },
     "HASH_TO_TORRENT_API": {
@@ -68,7 +73,7 @@
     },
     "TELEGRAPH_SHORT_NAME": {
       "description": "This is required for the @telegraph functionality.",
-      "value": "UniBorg",
+      "value": "LUCIFERTHEKING",
       "required": false
     },
     "OCR_SPACE_API_KEY": {
@@ -76,17 +81,12 @@
       "required": false
     },
     "G_BAN_LOGGER_GROUP": {
-      "description": "Send .get_id in any group with all your administration bots (added)",
+      "description": "Send .g_id in any group with all your administration bots (added)",
       "value": "-100",
       "required": false
     },
     "TG_GLOBAL_ALBUM_LIMIT": {
       "description": "How many media should appear when you do a .google image search? (setting a low value is preferred)",
-      "value": "9",
-      "required": false
-    },
-    "GOOGLE_SEARCH_COUNT_LIMIT": {
-      "description": "How many search result should appear when you do a .google search search? (setting a low value is preferred)",
       "value": "9",
       "required": false
     },
@@ -115,7 +115,7 @@
       "required": false
     },
     "PM_LOGGR_BOT_API_ID": {
-      "description": "send .get_id in any channel to forward all your NEW PMs to this group",
+      "description": "send .g_id in any channel to forward all your NEW PMs to this group",
       "required": false
     },
     "NO_OF_BUTTONS_DISPLAYED_IN_H_ME_CMD": {
@@ -126,6 +126,14 @@
       "description": "specify command handler that should be used for the plugins. This should be a valid \"regex\" pattern",
       "required": false
     },
+    "HEROKU_APP_NAME": {
+      "description": "heroku app name for .update",
+      "required": false
+    },
+    "HEROKU_API_KEY": {
+      "description": "get it from heroku settings",
+      "required": false
+    },
     "SUDO_USERS": {
       "description": "Makes Your Account Stable.",
       "value": "138312364",
@@ -133,6 +141,7 @@
     },
     "TZ": {
       "description": "set your default time zone for time related features to work correctly. Value should match the string here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones",
+      "value": "Asia/Kolkata",
       "required": false
     },
     "VERY_STREAM_LOGIN": {
@@ -156,7 +165,8 @@
       "required": false
     },
     "AUTH_TOKEN_DATA": {
-      "description": "This is required for gdrive to work.",
+      "description": "This is required for gdrive to work. This might help: https://da.gd/authtoken ",
+      "value": "blahblah",
       "required": false
     },
     "DATA_DIRECTORY": {
@@ -167,6 +177,21 @@
     "FF_MPEG_DOWN_LOAD_MEDIA_PATH": {
       "description": "blah blah blah.",
       "value": "./uniborg.media.ffmpeg/",
+      "required": false
+    },
+    "PM_LOGGR_BOT_API_ID": {
+      "description": "Type .g_id in private channel and add that value here.",
+      "value": "-100",
+      "required": false
+    },
+    "CHROME_BIN": {
+      "description": "For Carbon.py",
+      "value": "/app/.apt/usr/bin/google-chrome",
+      "required": false
+    },
+    "CHROME_DRIVER": {
+      "description": "For Carbon.py",
+      "value": "/app/.chromedriver/bin/chromedriver",
       "required": false
     },
     "GITHUB_ACCESS_TOKEN": {
@@ -183,7 +208,6 @@
     },
     "OPEN_LOAD_LOGIN": {
       "description": "Same Description As Above.",
-      "value": "https://example.com/torrent/{}",
       "required": false
     },
     "TEMP_DIR": {
@@ -194,6 +218,11 @@
     "UB_BLACK_LIST_CHAT": {
       "description": "haha",
       "value": "-100",
+      "required": false
+    },
+    "RAVANA_LEELA": {
+      "description": "TO ADD TIME ON YOUR PROFILE PIC, ADD LINK OF IMAGE ENDING WITH .JPG",
+      "value": "https://telegra.ph/file/674ef67d845b4304823d3.jpg",
       "required": false
     },
     "TELE_GRAM_2FA_CODE": {

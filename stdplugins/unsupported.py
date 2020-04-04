@@ -1,15 +1,15 @@
-""".admin Plugin for @UniBorg"""
+"""Command: `.repo` , .session"""
 import asyncio
 from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd("z"))
+@borg.on(admin_cmd("repo"))
 async def _(event):
     if event.fwd_from:
         return
-    mentions = "**Plugins To Load:**\n\n`.load afk`\n\n`.load telegraph `"
+    mentions = "**Lenk To The Kustom Furked Repe:** https://github.com/ravana69/PornHub/ "
     chat = await event.get_input_chat()
     async for x in borg.iter_participants(chat, filter=ChannelParticipantsAdmins):
         mentions += f""
@@ -21,12 +21,11 @@ async def _(event):
         await event.reply(mentions)
     await event.delete()
 
-
-@borg.on(admin_cmd("repo"))
+@borg.on(admin_cmd("session"))
 async def _(event):
     if event.fwd_from:
         return
-    mentions = "**Link To The Custom Forked Repo:** https://github.com/ravana69/PornHub/ "
+    mentions = "**telethon.errors.rpcerrorlist.AuthKeyDuplicatedError: The authorization key (session file) was used under two different IP addresses simultaneously, and can no longer be used. Use the same session exclusively, or use different sessions (caused by GetMessagesRequest)**"
     chat = await event.get_input_chat()
     async for x in borg.iter_participants(chat, filter=ChannelParticipantsAdmins):
         mentions += f""

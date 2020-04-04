@@ -1,5 +1,5 @@
 """Get Telegram Profile Picture and other information
-Syntax: .whois @username"""
+Syntax: .rendi @username"""
 
 import html
 from telethon.tl.functions.photos import GetUserPhotosRequest
@@ -9,7 +9,7 @@ from telethon.utils import get_input_location
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd("whois ?(.*)"))
+@borg.on(admin_cmd("rendi ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -48,15 +48,15 @@ async def _(event):
         location = str(e)
     caption = """Detailed Whois:
 
-ID🔖: <code>{}</code>
-Name🤵: <a href='tg://user?id={}'>{}</a>
-Bio✍️: {}
-Data Centre Number🌏: {}
-Number of Profile Pics🖼: {}
-Restricted🔏: {}
-Verified🌐: {}
-Bot🤖: {}
-Groups in Common👥: {}
+🔖ID: <code>{}</code>
+🤵Name: <a href='tg://user?id={}'>{}</a>
+✍️Bio: {}
+🌏Data Centre Number: {}
+🖼Number of Profile Pics: {}
+🔏Restricted: {}
+🌐Verified: {}
+🤖Bot: {}
+👥Groups in Common: {}
 
 
 List Of Telegram Data Centres:

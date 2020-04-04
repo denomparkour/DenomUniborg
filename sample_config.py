@@ -25,7 +25,7 @@ class Config(object):
     # This is required for the plugins involving the file system.
     TMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./DOWNLOADS/")
     # This is required for the speech to text module. Get your USERNAME from https://console.bluemix.net/docs/services/speech-to-text/getting-started.html
-    IBM_WATSON_CRED_USERNAME = os.environ.get("IBM_WATSON_CRED_USERNAME", None)
+    IBM_WATSON_CRED_URL = os.environ.get("IBM_WATSON_CRED_URL", None)
     IBM_WATSON_CRED_PASSWORD = os.environ.get("IBM_WATSON_CRED_PASSWORD", None)
     # This is required for the hash to torrent file functionality to work.
     HASH_TO_TORRENT_API = os.environ.get("HASH_TO_TORRENT_API", "https://example.com/torrent/{}");
@@ -36,7 +36,6 @@ class Config(object):
     # Send .get_id in any group with all your administration bots (added)
     G_BAN_LOGGER_GROUP = int(os.environ.get("G_BAN_LOGGER_GROUP", -100123456789))
     # TG API limit. An album can have atmost 10 media!
-    GOOGLE_SEARCH_COUNT_LIMIT = int(os.environ.get("GOOGLE_SEARCH_COUNT_LIMIT", 9))
     TG_GLOBAL_ALBUM_LIMIT = int(os.environ.get("TG_GLOBAL_ALBUM_LIMIT", 9))
     # Telegram BOT Token from @BotFather
     TG_BOT_TOKEN_BF_HER = os.environ.get("TG_BOT_TOKEN_BF_HER", None)
@@ -62,12 +61,19 @@ class Config(object):
     # specify LOAD and NO_LOAD
     LOAD = []
     # foloowing plugins won't work on Heroku,
-    # because of their ephemeral file system
+    # ⚡Remove This To Make Them Work But Would Make Bot Unstable AF...⚡
     NO_LOAD = [
         "fwd",
-        "telegraph",
-        "afk",
-        "gban"
+        "antiflood",
+        "blacklist",
+        "locks",
+        "pmpermit",
+        "snip",
+        "gban",
+        "welcome",
+        "markdown",
+        "mention"
+
     ]
     # Get your own API key from https://www.remove.bg/ or
     # feel free to use http://telegram.dog/Remove_BGBot
@@ -121,7 +127,30 @@ class Config(object):
     # taken from https://github.com/jaskaranSM/UniBorg/blob/9072e3580cc6c98d46f30e41edbe73ffc9d850d3/sample_config.py#L104-L106
     GOOGLE_CHROME_DRIVER = os.environ.get("GOOGLE_CHROME_DRIVER", None)
     GOOGLE_CHROME_BIN = os.environ.get("GOOGLE_CHROME_BIN", None)
-
+    #
+    LYDIA_API = os.environ.get("LYDIA_API", None)
+    #
+    CHROME_DRIVER = os.environ.get("CHROME_DRIVER", None)
+    CHROME_BIN = os.environ.get("CHROME_BIN", None)
+    #
+    RAVANA_LEELA = os.environ.get("RAVANA_LEELA", None)
+    #
+    SPOTIFY_USERNAME = os.environ.get("SPOTIFY_USERNAME", None)
+    #
+    SPOTIFY_PASS = os.environ.get("SPOTIFY_PASS", None)
+    #
+    DEFAULT_NAME = os.environ.get("DEFAULT_NAME", None)
+    #
+    SPOTIFY_BIO_PREFIX = os.environ.get("SPOTIFY_BIO_PREFIX", None)
+    #
+    API_TOKEN = os.environ.get("API_TOKEN", None)
+    #
+    watermark_path = os.environ.get("watermark_path", None)
+    # RSS_POST_MSG_GROUP_ID = map(int, os.environ.get("RSS_POST_MSG_GROUP_ID", None).split())
+    RSS_POST_MSG_GROUP_ID = os.environ.get("RSS_POST_MSG_GROUP_ID", None)
+    if RSS_POST_MSG_GROUP_ID:
+        RSS_POST_MSG_GROUP_ID = int(RSS_POST_MSG_GROUP_ID)
+    SPAM_WATCH_API = os.environ.get("SPAM_WATCH_API", None)
 class Production(Config):
     LOGGER = False
 
