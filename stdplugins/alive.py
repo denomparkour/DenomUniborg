@@ -1,4 +1,4 @@
-""".admin Plugin for @UniBorg"""
+""".alive Plugin for @UniBorg"""
 import asyncio
 from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
@@ -9,7 +9,7 @@ from uniborg.util import admin_cmd
 async def _(event):
     if event.fwd_from:
         return
-    mentions = "`Your bot is running\n\nTelethon version: 1.9.0\nPython: 3.7.4\nUser: @thedenomparkour\nDatabase Status: Databases functioning normally!`"
+    mentions = "█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█\n█░░╦─╦╔╗╦─╔╗╔╗╔╦╗╔╗░░█\n█░░║║║╠─║─║─║║║║║╠─░░█\n█░░╚╩╝╚╝╚╝╚╝╚╝╩─╩╚╝░░█\n█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█\n█░░░░░░░░░░░░░░░░░░░░█\n█░░░User: @r4v4n4  ░░░░░░░█\n█░░░Server:Online  ░░░░░░░░█\n█░░░Telethon version: 1.11.3░░█\n█░░░Python: 3.8.2  ░░░░░░░░█\n█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█"
     chat = await event.get_input_chat()
     async for x in borg.iter_participants(chat, filter=ChannelParticipantsAdmins):
         mentions += f""
