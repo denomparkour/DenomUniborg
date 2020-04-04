@@ -21,7 +21,7 @@ async def _(event):
     search_query = event.pattern_match.group(2)
     try:
         output_message = ""
-        bot_results = await borg.inline_query(  # pylint:disable=E0602
+        bot_results = await event.client.inline_query(  # pylint:disable=E0602
             bot_username,
             search_query
         )
@@ -68,62 +68,100 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         query = event.text
         if event.query.user_id == borg.uid and query.startswith("@UniBorg"):
             rev_text = query[::-1]
-            buttons = paginate_help(0, borg._plugins, "helpme")
+            buttons = paginate_help(0, borg._plugins, "info")
             result = builder.article(
                 "© @UniBorg",
                 text="{}\nℂ𝕦𝕣𝕣𝕖𝕟𝕥𝕝𝕪 𝕃𝕠𝕒𝕕𝕖𝕕 ℙ𝕝𝕦𝕘𝕚𝕟𝕤: {}".format(
                     query, len(borg._plugins)),
                 buttons=buttons,
-                link_preview=False
+                link_preview=True
             )
-        elif query.startswith("tb_btn"):
+        elif query.startswith("choot"):
             result = builder.article(
-                "Button Parser © @UniBorg",
-                text=f"powered by @UniBorg",
+                "@r4v4n4: Bhagwaan Sabko GF De",
+                text=f"[Choot](https://telegra.ph/file/019a2eab3d66d39c92a75.mp4)",
                 buttons=[],
                 link_preview=True
             )
+        elif query.startswith("bhoot"):
+            result = builder.article(
+                "@r4v4n4: Bhagwaan Sabko GF De",
+                text=f"[bhoot](https://da.gd/ovpt5)",
+                buttons=[],
+                link_preview=True
+            )
+        elif query.startswith("repo"):
+            result = builder.article(
+                "@r4v4n4: yeh hai button deploy kar le",
+                text=f"Ganja Sutta on the floor",
+                buttons=[
+                    [custom.Button.url("👤Click on the button to deploy pornhub repo👤", "https://github.com/ravana69/Pornhub")],
+                ],
+                link_preview=True
+            )
+        elif query.startswith("imdb"):
+            result = builder.article(
+                "@r4v4n4: IMDB",
+                text="""**Title:** Choot Ki Raani (1969)
+**Rating ⭐️:** 10 / 10
+(5.5 based on 7,610 user ratings) | U | 0h 69min |
+**Release Info:** 14 Feb 1969 (India)
+**Genre:** 🌋 #Adventure 🤣 #Comedy #Family
+**Language:**  #Bhojpuri #English
+**Country of Origin:**  #India
+**Story Line:** A young man Ravana moves from Bihar to Florida with his dick, where he's compelled to engage in a sux to protect a population of endangered Choots.
+**Director:** Ravana @r4v4n4
+**Writers:** Ravana @r4v4n4
+**Stars:**  Ravana @r4v4n4
+[Read More ...](https://da.gd/qGtPI)""",
+                buttons=[
+                    [custom.Button.url("Open On IMDB ▶️", "https://da.gd/o5Yy")]
+                ],
+                link_preview=True
+                )
         else:
             result = builder.article(
                 "© @UniBorg",
-                text="""@thedenomparkour **( Custom Built By** @thedenomparkour xD**)** 
+                text="""@r4v4n4 **( Custom Built By** @r4v4n4 **)** 
 **Verified Account:** ✅
-**Python 3.7.4 (default, Sep 12 2019, 01:19:52)** 
-**[GCC 7.4.0]**
-**Telethon 1.10.3**
+**Official Website:** https://ravanaisdrunk.site.live [⠀](https://telegra.ph/file/b0604ea53360cd3858ec5.mp4)
 
-**Custom Built Fork:** https://github.com/denomparkour/DenomUniborg""",
+**Pithun 3.8.2 (default, Feb 27 2020, 21:41:26)** 
+**[GCC 7.4.0]**
+**Talethrun 1.11.3**
+
+**Custom Built Fork:** https://github.com/ravana69/Pornhub""",
                 buttons=[
-                    [custom.Button.url("👤Contact Modder👤", "https://telegram.dog/thedenomparkour"), custom.Button.url(
+                    [custom.Button.url("👤Contact Creator👤", "https://telegram.dog/r4v4n4"), custom.Button.url(
                         "📼Ravana Audio Memes📼", "https://t.me/tgaudiomemes")],
                     [custom.Button.url("👨‍💻Source Code👨‍💻", "https://github.com/ravana69/Pornhub"), custom.Button.url(
                         "❕❗Deploy Me❗❕", "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fravana69%2FPornHub%2F&template=https%3A%2F%2Fgithub.com%2Fravana69%2FPornHub%2F")],
                     [custom.Button.url("🔰Update Fork🔰", "tg://need_update_for_some_feature"), custom.Button.url(
                         "✳️Fork Boost✳️", "tg://some_unsupported_feature"), custom.Button.url(
-                        "♻️Refresh Heroku♻️", "tg://chutiya")]
+                        "📤Cloud Torrent📥", "https://github.com/ravana69/cloudtorrent")]
                 ],
-                link_preview=False
+                link_preview=True
             )
         await event.answer([result] if result else None)
 
 
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
-        data=re.compile(b"helpme_next\((.+?)\)")
+        data=re.compile(b"info_next\((.+?)\)")
     ))
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == borg.uid:  # pylint:disable=E0602
             current_page_number = int(
                 event.data_match.group(1).decode("UTF-8"))
             buttons = paginate_help(
-                current_page_number + 1, borg._plugins, "helpme")
+                current_page_number + 1, borg._plugins, "info")
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "😒Touch mat karna bisi 😒\n\nCustom Fork: https://www.github.com/denomparkour/DenomUniborg\n\n\nNote: Bas kar BetiChod, Maa Ke Laude, Madarchod"
+            reply_pop_up_alert = "⚠️ Warning: Don't Press Any Buttons ⚠️\n\nCustom Fork: https://github.com/ravana69/Pornhub\n\n\nNote: Bas kar BetiChod, Maa Ke Laude, Madarchod"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
-        data=re.compile(b"helpme_prev\((.+?)\)")
+        data=re.compile(b"info_prev\((.+?)\)")
     ))
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == borg.uid:  # pylint:disable=E0602
@@ -132,12 +170,12 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             buttons = paginate_help(
                 current_page_number - 1,
                 borg._plugins,  # pylint:disable=E0602
-                "helpme"
+                "info"
             )
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Ayu lodu....Mera wala touch mat karna.Chahiye tho @Uniborg se lelo"
+            reply_pop_up_alert = "Please get your own @UniBorg, and don't edit my messages!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
