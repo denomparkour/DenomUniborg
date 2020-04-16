@@ -151,6 +151,10 @@ class Config(object):
     if RSS_POST_MSG_GROUP_ID:
         RSS_POST_MSG_GROUP_ID = int(RSS_POST_MSG_GROUP_ID)
     SPAM_WATCH_API = os.environ.get("SPAM_WATCH_API", None)
+    #
+    HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
+    #
+    HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
 class Production(Config):
     LOGGER = False
 
