@@ -52,7 +52,7 @@ async def autopic(event):
         image.save(photo)
         
         #Edit only Below part 🌚 Or esle u will be responsible 🤷‍♂
-        current_time = datetime.now().strftime("\n Time: %I:%M %p \n \n Date: %d/%m/%y")
+        current_time = datetime.now().strftime("\n Time: %I:%M %p \n \n Date: %d/%m/%y \n \n @thedenomparkour")
         img = Image.open(photo)
         drawn_text = ImageDraw.Draw(img)
         fnt = ImageFont.truetype(FONT_FILE_TO_USE, 60)
